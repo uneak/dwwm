@@ -1,0 +1,20 @@
+{% extends 'bootstrap_base.html.twig' %}
+
+{% block title %}Hello Todo!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="mb-5 mt-5">Create todo</h1>
+    <form method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+{% endblock %}

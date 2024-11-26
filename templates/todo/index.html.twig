@@ -1,0 +1,17 @@
+{% extends 'bootstrap_base.html.twig' %}
+
+{% block title %}Hello Todo!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="mb-5 mt-5">Todo List</h1>
+    <ul class="list-group">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+    </ul>
+    <a href="{{ path('app_todo_create') }}" class="btn btn-primary mt-5">Add a new todo</a>
+</div>
+{% endblock %}
