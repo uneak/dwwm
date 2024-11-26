@@ -3,15 +3,69 @@
 {% block title %}Hello Todo!{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1 class="mb-5 mt-5">Todo List</h1>
-    <ul class="list-group">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-        <li class="list-group-item">A fourth item</li>
-        <li class="list-group-item">And a fifth one</li>
-    </ul>
-    <a href="{{ path('app_todo_create') }}" class="btn btn-primary mt-5">Add a new todo</a>
-</div>
+    <div class="container">
+        <h1 class="mb-5 mt-5">Todo List</h1>
+        <ul class="list-group">
+            {% for task in tasks %}
+                <li class="list-group-item" data-title="{{ task.title }}" data-descripttion="{{ task.description }}">
+                    <input type="checkbox" {% if task.isComplete %}checked{% endif %}
+                           onChange="window.location.href='{{ path('app_todo_toggle', {id: task.id}) }}'"
+                    >
+                    <a href="#" class="cta" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        {% if task.isComplete %}
+                            <del>{{ task.title }}</del>
+                        {% else %}
+                            {{ task.title }}
+                        {% endif %}
+                    </a>
+                    <a href="{{ path('app_todo_edit', {id: task.id}) }}">E</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ path('app_todo_create') }}" class="btn btn-primary mt-5">Add a new todo</a>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts_bottom %}
+    {{ parent() }}
+    <script>
+        const modal = document.querySelector('.modal');
+        const modalTitle = modal.querySelector('.modal-title');
+        const modalBody = modal.querySelector('.modal-body');
+
+        const listItems = document.querySelectorAll('.list-group-item');
+
+        listItems.forEach(function (item) {
+            item.addEventListener('click', function () {
+                var title = item.getAttribute('data-title');
+                var description = item.getAttribute('data-descripttion');
+
+                modalTitle.textContent = title;
+                modalBody.textContent = description;
+            });
+        });
+
+    </script>
 {% endblock %}

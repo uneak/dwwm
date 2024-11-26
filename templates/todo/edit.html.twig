@@ -8,13 +8,13 @@
         <form method="post">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="title">
+                <input type="text" class="form-control" id="title" name="title" value="{{ title }}">
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description"></textarea>
+                <textarea class="form-control" id="description" name="description">{{ description }}</textarea>
             </div>
-            <a href="#" class="btn btn-secondary">Supprimer</a>
+            <a href="{{ path('app_todo_delete', {id: id}) }}" class="btn btn-secondary">Supprimer</a>
             <button type="submit" class="btn btn-primary">Modifier</button>
         </form>
     </div>
