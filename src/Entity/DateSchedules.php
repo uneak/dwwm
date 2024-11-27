@@ -91,7 +91,7 @@
             return $this->isOpen;
         }
 
-        public function setOpen(bool $isOpen): static
+        public function setIsOpen(bool $isOpen): static
         {
             $this->isOpen = $isOpen;
 

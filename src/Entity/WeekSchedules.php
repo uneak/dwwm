@@ -18,7 +18,7 @@
         private ?\DateTimeInterface $startedAt = null;
 
         #[ORM\Column(type: Types::TIME_MUTABLE)]
-        private ?\DateTimeInterface $EndedAt = null;
+        private ?\DateTimeInterface $endedAt = null;
 
         #[ORM\ManyToOne]
         #[ORM\JoinColumn(nullable: false)]
@@ -47,12 +47,12 @@
 
         public function getEndedAt(): ?\DateTimeInterface
         {
-            return $this->EndedAt;
+            return $this->endedAt;
         }
 
-        public function setEndedAt(\DateTimeInterface $EndedAt): static
+        public function setEndedAt(\DateTimeInterface $endedAt): static
         {
-            $this->EndedAt = $EndedAt;
+            $this->endedAt = $endedAt;
 
             return $this;
         }
