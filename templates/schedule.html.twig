@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horaires</title>
+</head>
+<body>
+<h1>{{ company.name }} : {{ date.format('d/m/Y H:i') }} actuellement {{ isOpened ? "Ouvert" : "Fermé" }}</h1>
+
+<h2>Horaires hebdomadaires :</h2>
+<ul>
+    {% for day, schedules in weekSchedules %}
+        <li>
+            <strong>{{ day }}</strong> :
+            {% if schedules is not empty %}
+                <ul>
+                    {% for schedule in schedules %}
+                        <li>
+                            {{ schedule.startedAt|date('H:i') }} - {{ schedule.endedAt|date('H:i') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                Pas d'horaires pour ce jour.
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Ouvertures/Fermetures exceptionnelles :</h2>
+<ul>
+    {% for date, schedules in dateSchedules %}
+        <li>
+            <strong>{{ date|date('d/m/Y') }}</strong> :
+            <ul>
+                {% for schedule in schedules %}
+                    <li>
+                        {{ schedule.name }} :
+                        {{ schedule.startedAt|date('H:i') }} - {{ schedule.endedAt|date('H:i') }}
+                        {% if schedule.open %}
+                            (Ouvert)
+                        {% else %}
+                            (Fermé)
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

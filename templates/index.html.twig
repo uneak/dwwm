@@ -9,12 +9,12 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Choose your company</h1>
 
-    This friendly message is coming from:
     <ul>
-        <li>Your controller at <code>/app/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/app/templates/home/index.html.twig</code></li>
+        {% for company in companies %}
+        <li><a href="{{ path('app_schedule', {id: company.id}) }}">{{ company.name }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}
